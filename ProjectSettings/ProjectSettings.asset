@@ -465,6 +465,8 @@ PlayerSettings:
   cloudServicesEnabled:
     Build: 1
     Collab: 1
+    ErrorHub: 0
+    Hub: 0
     UNet: 1
   cloudProjectId: 5332b4e5-9a2f-48c1-9192-912ab937d767
   projectName: CurrentCalStateLA

@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UgandanMovement : MonoBehaviour {
+    public float xAngle, yAngle, zAngle;
     Rigidbody rigidBody;
     [SerializeField] float rcsThrust = 100f;
     [SerializeField] float initialThrust = 100f;
@@ -16,7 +18,8 @@ public class UgandanMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        movement();
+        RespondToForward();
+        RespondToRotate();
     }
 
 
@@ -24,35 +27,54 @@ void RespondToForward()
     {
         if (Input.GetKey(KeyCode.W))
         {
-            rigidBody.AddRelativeForce(Vector3.up * initialThrust);
+            rigidBody.AddRelativeForce(Vector3.forward * initialThrust);
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            rigidBody.AddRelativeForce(-Vector3.forward * initialThrust);
         }
     }
 
     void RespondToRotate()
     {
-        rigidBody.freezeRotation = true;
-        float rotationSpeed = rcsThrust * Time.deltaTime;
-
+        // rigidBody.freezeRotation = true;
+        // float rotationSpeed = rcsThrust * Time.deltaTime;
+       // transform.position = new Vector3(0.75f, 0f, 0f);
         if (Input.GetKey(KeyCode.A))
         {
-            transform.Rotate(Vector3.up * rotationSpeed);
+            rigidBody.AddRelativeForce(Vector3.left * rcsThrust);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            transform.Rotate(-Vector3.forward * rotationSpeed);
+            rigidBody.AddRelativeForce(Vector3.right * rcsThrust);
         }
-      
-        rigidBody.freezeRotation = false;
+       // if (Input.GetKey(KeyCode.LeftArrow))
+        //{
+          //  transform.Rotate(xAngle, yAngle,zAngle);
+        //}
+      //  rigidBody.freezeRotation = false;
 
     }
-    void movement()
+    void OnCollisionEnter(Collision collision)
     {
-
-        if (Input.GetKey(KeyCode.A))
+        switch (collision.gameObject.tag)
         {
-            float move = Input.GetAxis("Horizontal");
-            GetComponent<Rigidbody>().velocity = new Vector3(move * rcsThrust, GetComponent<Rigidbody>().velocity.y, GetComponent<Rigidbody>().velocity.z);
- }
+            case "Friendly":
+
+                break;
+            case "Bio Building":
+                LoadNextLevel();
+                break;
+            case "Finish2":
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void LoadNextLevel()
+    {
+        SceneManager.LoadScene(1);
     }
 }
 
