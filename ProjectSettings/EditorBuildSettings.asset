@@ -7,5 +7,11 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/School.unity
+    guid: 16ffeed7880a3324381fafe30dadd219
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Bio Buildinng.unity
+    path: Assets/Inside Buildings/Bio Buildinng.unity
+    guid: 7e2e37dd7721f3c418010272ccab4707
+  m_configObjects: {}
