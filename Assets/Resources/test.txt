@@ -1,0 +1,6 @@
+SelectBuilding
+Bio Building
+JFK Library
+King Hall
+Salazar Hall
+Annex Lab
